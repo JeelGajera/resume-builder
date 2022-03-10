@@ -1,5 +1,8 @@
 {
   "name": "resume-builder",
+  "author": "Jeel Gajera",
+  "description": "This is a Online Resume Builder Web Application",
+  "keywords": ["Resume", "CV", "React App"],
   "version": "0.1.0",
   "private": true,
   "dependencies": {
