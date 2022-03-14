@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
+
+.hcontainer {
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #556270;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FF6B6B, #556270);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FF6B6B, #556270);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    max-height: 45vh;
+    box-shadow: 0 0 20px #000;
+}
+
+.hcontainer .hheading {
+    color: #001524;
+    font-size: 3em;
+    font-family: 'Hi Melody', cursive;
+    letter-spacing: 1px;
+    font-weight: bolder;
+    text-shadow: 2px 5px 8px rgba(0,0,0,0.79);
+}
+
+.hheading span {
+    background-clip: text;
+    background-image: linear-gradient(to right, #ab2836, #1d3958);
+    color: transparent;
+}
+
+.himage img {
+    width: 450px;
+}
