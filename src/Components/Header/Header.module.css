@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
 
-.hcontainer {
+.container {
     padding: 30px;
     text-align: center;
     display: flex;
@@ -16,7 +16,7 @@
     box-shadow: 0 0 20px #000;
 }
 
-.hcontainer .hheading {
+.container .heading {
     color: #001524;
     font-size: 3em;
     font-family: 'Hi Melody', cursive;
@@ -25,12 +25,12 @@
     text-shadow: 2px 5px 8px rgba(0,0,0,0.79);
 }
 
-.hheading span {
+.heading span {
     background-clip: text;
     background-image: linear-gradient(to right, #ab2836, #1d3958);
     color: transparent;
 }
 
-.himage img {
+.image img {
     width: 450px;
 }
