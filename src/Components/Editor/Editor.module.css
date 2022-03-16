@@ -27,12 +27,12 @@
 
 .header .active {
     border-bottom: 2px solid #f8b34b;
-    color: #1691c2
+    text-shadow: 1px 3px 8px rgb(7, 204, 253);
+    animation: fadeIn linear 1s;
 }
 
 .section:hover {
     text-shadow: 0 0 10px #eee;
-    animation: fadeIn linear 1s;
 }
 
 @keyframes fadeIn {
@@ -65,4 +65,47 @@
 
 .detail .row > div {
     flex: 1;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.chip {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #646463;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #000;
+}
+
+.chip p {
+    font-weight: 500;
+    line-height: 5px;
+    color: rgb(0, 0, 0);
+}
+
+.chip svg {
+    color: #fff;
+    height: 10px;
+    width: 18px;
+    cursor: pointer;
+}
+
+.chip .active {
+    background-color: rgb(205, 210, 214);
+    box-shadow: 0 0 10px #f8b34b;
+}
+
+#close {
+    height: 20px;
+    width: 20px;
+    color: #ff7d00;
+}
+#close:active {
+    transform: scale(0.9);
 }

@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
-import InputControl from "../InputControl/InputControl.js"
+import React, { useState, useEffect } from 'react';
+import InputControl from "../InputControl/InputControl.js";
+import { XCircle } from "react-feather";
 import style from "./Editor.module.css";
 
 function Editor(props) {
-    const sections = props.sections
+    const sections = props.sections;
+
+    const information = props.information;
+
     const [activeSecKey, setActiveSecKey] = useState(Object.keys(sections)[0]);
+
+    const [activeInfo, setActiveInfo] = useState(
+        information[sections[Object.keys(sections)[0]]]
+    );
 
     const workExBody = (
         <div className={style.detail}>
             <div className={style.row}>
                 <InputControl label="Company Name" placeholder="Enter Company name eg. ISRO" />
             </div>
-                <InputControl label="Title" placeholder="Enter Title eg. Frontend Developer" />
+            <InputControl label="Title" placeholder="Enter Title eg. Frontend Developer" />
             <div className={style.row}>
                 <InputControl label="Certificate Link" placeholder="Enter Certificate link" />
                 <InputControl label="Location" placeholder="Enter location eg. Remote" />
@@ -34,7 +42,7 @@ function Editor(props) {
             <div className={style.row}>
                 <InputControl label="Title" placeholder="Enter title eg. Chap Application" />
             </div>
-                <InputControl label="Overview" placeholder="Enter basic overview of project" />
+            <InputControl label="Overview" placeholder="Enter basic overview of project" />
             <div className={style.row}>
                 <InputControl label="Deployed Link" placeholder="Enter Deployed link of project" />
                 <InputControl label="Github Link" placeholder="Enter Github link of project" />
@@ -67,7 +75,7 @@ function Editor(props) {
             <div className={style.row}>
                 <InputControl label="Name" placeholder="Enter your name" />
             </div>
-                <InputControl label="Title" placeholder="Enter your title eg. Frontend developer" />
+            <InputControl label="Title" placeholder="Enter your title eg. Frontend developer" />
             <div className={style.row}>
                 <InputControl label="Linkedin Link" placeholder="Enter Linkedin profile link" />
                 <InputControl label="Github Link" placeholder="Enter Github profile link" />
@@ -115,6 +123,11 @@ function Editor(props) {
         }
     };
 
+    useEffect(() => {
+        setActiveInfo(information[sections[sections[activeSecKey]]])
+    }, [activeSecKey, information, sections])
+
+
     return (
         <div className={style.container}>
             <div className={style.header}>
@@ -128,6 +141,22 @@ function Editor(props) {
             </div>
             <div className={style.body}>
                 <InputControl label="Title" placeholder="Enter Section title" />
+                <div className={style.chips}>
+                    {
+                        activeInfo?.details 
+                        ? activeInfo?.details?.map((item, index) => (
+                                <div className={style.chip} key={item.title+index}>
+                                    <p>{sections[activeSecKey]} {index+1}</p>
+                                    <XCircle id={style.close} />
+                                </div>
+                            ))
+                     : ""}
+
+                    <div className={style.chip}>
+                        <p>Project 1</p>
+                        <XCircle id={style.close} />
+                    </div>
+                </div>
                 {generateBody()}
             </div>
         </div>
