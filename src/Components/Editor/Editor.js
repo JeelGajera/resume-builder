@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InputControl from "../InputControl/InputControl.js";
-import { XCircle } from "react-feather";
+import { XCircle, Save } from "react-feather";
 import style from "./Editor.module.css";
 
 function Editor(props) {
@@ -12,6 +12,12 @@ function Editor(props) {
 
     const [activeInfo, setActiveInfo] = useState(
         information[sections[Object.keys(sections)[0]]]
+    );
+
+    const [sectionTitle, setSectionTitle] = useState(sections[Object.keys(sections)[0]]);
+
+    const [values, setVelues] = useState(
+        
     );
 
     const workExBody = (
@@ -125,9 +131,9 @@ function Editor(props) {
 
     useEffect(() => {
         setActiveInfo(information[sections[sections[activeSecKey]]])
+        setSectionTitle(sections[activeSecKey])
     }, [activeSecKey, information, sections])
-
-
+    console.log(sections[activeSecKey]);
     return (
         <div className={style.container}>
             <div className={style.header}>
@@ -140,24 +146,36 @@ function Editor(props) {
                 ))}
             </div>
             <div className={style.body}>
-                <InputControl label="Title" placeholder="Enter Section title" />
+                <InputControl 
+                    label="Title" 
+                    placeholder="Enter Section title"
+                    value={sectionTitle} 
+                    onChange={(e) => setSectionTitle(e.target.value)}
+                />
                 <div className={style.chips}>
-                    {
-                        activeInfo?.details 
-                        ? activeInfo?.details?.map((item, index) => (
-                                <div className={style.chip} key={item.title+index}>
-                                    <p>{sections[activeSecKey]} {index+1}</p>
-                                    <XCircle id={style.close} />
-                                </div>
-                            ))
-                     : ""}
+                    {/* {activeInfo.details
+                        ? activeInfo.details.map((item, index) => (
+                            <div
+                                className={style.chip}
+                                key={item.title}
+                            >
+                                <p>
+                                    {sections[activeSecKey]} {index + 1}
+                                </p>
+                                <XCircle/>
+                            </div>
+                        ))
+                        : ""} */}
 
-                    <div className={style.chip}>
+                    {/* <div className={style.chip}>
                         <p>Project 1</p>
                         <XCircle id={style.close} />
-                    </div>
+                    </div> */}
                 </div>
                 {generateBody()}
+                <div className={style.savebtn}>
+                <button className={style.save}>Save<Save/></button>
+                </div>
             </div>
         </div>
     )

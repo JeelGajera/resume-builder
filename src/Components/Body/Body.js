@@ -16,7 +16,7 @@ function Body() {
         other: "Other"
     };
 
-    const [resumeInfo, setResumeInfo] = useState({
+    const [resumeInfo] = useState({
         [sections.basicInfo]: {
             id: sections.basicInfo,
             title: sections.basicInfo,

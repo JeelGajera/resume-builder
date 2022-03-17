@@ -43,7 +43,7 @@
 .body {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
 }
 
 .detail {
@@ -70,14 +70,15 @@
 .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
 }
 
 .chip {
     display: flex;
     gap: 5px;
     align-items: center;
-    padding: 4px 8px;
+    padding: 1px 8px;
+    margin: 8px 4px;
     background-color: #646463;
     border-radius: 20px;
     box-shadow: 0 0 10px #000;
@@ -108,4 +109,33 @@
 }
 #close:active {
     transform: scale(0.9);
+    color: #eee;
+}
+
+.savebtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.save {
+    width: 120px;
+    height: 40px;
+    font-size: 1em;
+    font-weight: 500;
+    color: #ff7d00;
+    background-color: #646463;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #000;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.save:active {
+    color: #eee;
+    transform: scale(0.9)
 }
