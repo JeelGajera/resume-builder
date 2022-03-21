@@ -19,7 +19,7 @@ function Editor(props) {
     const [values, setVelues] = useState(
         
     );
-
+    
     const workExBody = (
         <div className={style.detail}>
             <div className={style.row}>
@@ -130,9 +130,9 @@ function Editor(props) {
     };
 
     useEffect(() => {
-        setActiveInfo(information[sections[sections[activeSecKey]]])
+        setActiveInfo(information[sections[activeSecKey]])
         setSectionTitle(sections[activeSecKey])
-    }, [activeSecKey, information, sections])
+    }, [activeSecKey])
     console.log(sections[activeSecKey]);
     return (
         <div className={style.container}>
@@ -153,8 +153,8 @@ function Editor(props) {
                     onChange={(e) => setSectionTitle(e.target.value)}
                 />
                 <div className={style.chips}>
-                    {/* {activeInfo.details
-                        ? activeInfo.details.map((item, index) => (
+                    {activeInfo?.details
+                        ? activeInfo?.details.map((item, index) => (
                             <div
                                 className={style.chip}
                                 key={item.title}
@@ -165,12 +165,8 @@ function Editor(props) {
                                 <XCircle/>
                             </div>
                         ))
-                        : ""} */}
+                        : ""}
 
-                    {/* <div className={style.chip}>
-                        <p>Project 1</p>
-                        <XCircle id={style.close} />
-                    </div> */}
                 </div>
                 {generateBody()}
                 <div className={style.savebtn}>

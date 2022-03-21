@@ -20,7 +20,7 @@ function Body() {
         [sections.basicInfo]: {
             id: sections.basicInfo,
             title: sections.basicInfo,
-            details: {},
+            detail: {},
         },
         [sections.workExp]: {
             id: sections.workExp,
@@ -45,12 +45,12 @@ function Body() {
         [sections.summary]: {
             id: sections.summary,
             title: sections.summary,
-            details: "",
+            detail: "",
         },
         [sections.other] : {
             id: sections.other,
             title: sections.other,
-            details: "",
+            detail: "",
         },
     });
 
