@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Download } from 'react-feather';
 import Editor from '../Editor/Editor.js';
 import style from "./Body.module.css";
 
-function Body() {
+function Body() { 
     const colors = ["#001524", "#ff7d00", "#A89C94FF", "#00203FFF", "#E94B3CFF", "#00539CFF"];
-
+ 
     const sections = {
         basicInfo: "Basic Info",
         workExp: "Work Experience",
@@ -53,6 +53,11 @@ function Body() {
             detail: "",
         },
     });
+
+    useEffect(() => {
+        console.log(resumeInfo);
+    }, [resumeInfo])
+    
 
     return (
         <div className={style.container}>

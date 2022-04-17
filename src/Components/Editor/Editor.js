@@ -8,8 +8,6 @@ function Editor(props) {
 
     const information = props.information;
 
-    const setInformation = props.setInformation;
-
     const [activeSecKey, setActiveSecKey] = useState(Object.keys(sections)[0]);
 
     const [activeInfo, setActiveInfo] = useState(
@@ -17,6 +15,8 @@ function Editor(props) {
     );
 
     const [sectionTitle, setSectionTitle] = useState(sections[Object.keys(sections)[0]]);
+
+    const [activeDetailIndex, setActiveDetailIndex] = useState(0);
 
     const [values, setVelues] = useState({
         name: activeInfo.detail?.name || "",
@@ -28,86 +28,88 @@ function Editor(props) {
     });
 
     const handlePointUpdate = (value, index) => {
-        const tempVal = {...values};
+        const tempVal = { ...values };
+        if (!Array.isArray(tempVal.points)) tempVal.points = [];
         tempVal.points[index] = value;
         setVelues(tempVal);
     }
 
+    // Body components of editor part
     const basicInfoBody = (
         <div className={style.detail}>
             <div className={style.row}>
-                <InputControl label="Name" placeholder="Enter your name" defaultValue={values.name}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, name: event.target.value}))
+                <InputControl label="Name" placeholder="Enter your name" value={values.name}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, name: event.target.value }))
                     }
                 />
             </div>
-            <InputControl label="Title" placeholder="Enter your title eg. Frontend developer" defaultValue={values.title}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, title: event.target.value}))
-                    } />
+            <InputControl label="Title" placeholder="Enter your title eg. Frontend developer" value={values.title}
+                onChange={(event) =>
+                    setVelues((prev) => ({ ...prev, title: event.target.value }))
+                } />
             <div className={style.row}>
-                <InputControl label="Linkedin Link" placeholder="Enter Linkedin profile link" defaultValue={values.linkedin}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, linkedin: event.target.value}))
+                <InputControl label="Linkedin Link" placeholder="Enter Linkedin profile link" value={values.linkedin}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, linkedin: event.target.value }))
                     } />
-                <InputControl label="Github Link" placeholder="Enter Github profile link" defaultValue={values.github}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, github: event.target.value}))
+                <InputControl label="Github Link" placeholder="Enter Github profile link" value={values.github}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, github: event.target.value }))
                     } />
             </div>
             <div className={style.row}>
-                <InputControl label="Email" placeholder="Enter your email" defaultValue={values.email} type="email"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, email: event.target.value}))
+                <InputControl label="Email" placeholder="Enter your email" value={values.email} type="email"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, email: event.target.value }))
                     } />
-                <InputControl label="Phone" placeholder="Enter your phone number" defaultValue={values.phone} type="tel"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, phone: event.target.value}))
+                <InputControl label="Phone" placeholder="Enter your phone number" value={values.phone} type="tel"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, phone: event.target.value }))
                     } />
             </div>
         </div>
     );
-    
+
     const workExBody = (
         <div className={style.detail}>
             <div className={style.row}>
-                <InputControl label="Company Name" defaultValue={values.companyName} placeholder="Enter Company name eg. ISRO"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, companyName: event.target.value}))
+                <InputControl label="Company Name" value={values.companyName} placeholder="Enter Company name eg. ISRO"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, companyName: event.target.value }))
                     } />
             </div>
-            <InputControl label="Title" defaultValue={values.title} placeholder="Enter Title eg. Frontend Developer"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, title: event.target.value}))
-                    } />
+            <InputControl label="Title" value={values.title} placeholder="Enter Title eg. Frontend Developer"
+                onChange={(event) =>
+                    setVelues((prev) => ({ ...prev, title: event.target.value }))
+                } />
             <div className={style.row}>
-                <InputControl label="Certificate Link" defaultValue={values.certificationLink} placeholder="Enter Certificate link"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, certificationLink: event.target.value}))
+                <InputControl label="Certificate Link" value={values.certificationLink} placeholder="Enter Certificate link"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, certificationLink: event.target.value }))
                     } />
-                <InputControl label="Location" defaultValue={values.location} placeholder="Enter location eg. Remote"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, location: event.target.value}))
+                <InputControl label="Location" value={values.location} placeholder="Enter location eg. Remote"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, location: event.target.value }))
                     } />
             </div>
             <div className={style.row}>
-                <InputControl label="Start Date" defaultValue={values.startDate} type="date" placeholder="Enter start date of work"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, startDate: event.target.value}))
+                <InputControl label="Start Date" value={values.startDate} type="date" placeholder="Enter start date of work"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, startDate: event.target.value }))
                     } />
-                <InputControl label="End Date" defaultValue={values.endDate} type="date" placeholder="Enter end date of work"
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, endDate: event.target.value}))
+                <InputControl label="End Date" value={values.endDate} type="date" placeholder="Enter end date of work"
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, endDate: event.target.value }))
                     } />
             </div>
             <div className={style.column}>
                 <label>Enter Work Description</label>
-                <InputControl placeholder="Line 1" defaultValue={values.points ? values.points[0] : ""}
+                <InputControl placeholder="Line 1" value={values.points ? values.points[0] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 0)} />
-                <InputControl placeholder="Line 2" defaultValue={values.points ? values.points[1] : ""}
+                <InputControl placeholder="Line 2" value={values.points ? values.points[1] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 1)} />
-                <InputControl placeholder="Line 3" defaultValue={values.points ? values.points[2] : ""}
+                <InputControl placeholder="Line 3" value={values.points ? values.points[2] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 2)} />
             </div>
         </div>
@@ -116,32 +118,32 @@ function Editor(props) {
     const projectBody = (
         <div className={style.detail}>
             <div className={style.row}>
-                <InputControl label="Title" placeholder="Enter title eg. Chap Application" defaultValue={values.title}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, title: event.target.value}))
+                <InputControl label="Title" placeholder="Enter title eg. Chap Application" value={values.title}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, title: event.target.value }))
                     } />
             </div>
-            <InputControl label="Overview" placeholder="Enter basic overview of project" defaultValue={values.overview}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, overview: event.target.value}))
-                    } />
+            <InputControl label="Overview" placeholder="Enter basic overview of project" value={values.overview}
+                onChange={(event) =>
+                    setVelues((prev) => ({ ...prev, overview: event.target.value }))
+                } />
             <div className={style.row}>
-                <InputControl label="Deployed Link" placeholder="Enter Deployed link of project" defaultValue={values.deployLink}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, deployLink: event.target.value}))
+                <InputControl label="Deployed Link" placeholder="Enter Deployed link of project" value={values.deployLink}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, deployLink: event.target.value }))
                     } />
-                <InputControl label="Github Link" placeholder="Enter Github link of project" defaultValue={values.githubLink}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, githubLink: event.target.value}))
+                <InputControl label="Github Link" placeholder="Enter Github link of project" value={values.githubLink}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, githubLink: event.target.value }))
                     } />
             </div>
             <div className={style.column}>
                 <label>Enter Project Description</label>
-                <InputControl placeholder="Line 1" defaultValue={values.points ? values.points[0] : ""}
+                <InputControl placeholder="Line 1" value={values.points ? values.points[0] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 0)} />
-                <InputControl placeholder="Line 2" defaultValue={values.points ? values.points[1] : ""}
+                <InputControl placeholder="Line 2" value={values.points ? values.points[1] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 1)} />
-                <InputControl placeholder="Line 3" defaultValue={values.points ? values.points[2] : ""}
+                <InputControl placeholder="Line 3" value={values.points ? values.points[2] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 2)} />
             </div>
         </div>
@@ -150,23 +152,23 @@ function Editor(props) {
     const educationBody = (
         <div className={style.detail}>
             <div className={style.row}>
-                <InputControl label="Title" placeholder="Enter title eg. B.Tech" defaultValue={values.title}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, title: event.target.value}))
+                <InputControl label="Title" placeholder="Enter title eg. B.Tech" value={values.title}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, title: event.target.value }))
                     } />
-                <InputControl label="College/School Name" placeholder="Enter name of colege/school" defaultValue={values.collegeName}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, collegeName: event.target.value}))
+                <InputControl label="College/School Name" placeholder="Enter name of colege/school" value={values.collegeName}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, collegeName: event.target.value }))
                     } />
             </div>
             <div className={style.row}>
-                <InputControl label="Start Date" type="date" placeholder="Enter start date" defaultValue={values.startDate}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, startDate: event.target.value}))
+                <InputControl label="Start Date" type="date" placeholder="Enter start date" value={values.startDate}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, startDate: event.target.value }))
                     } />
-                <InputControl label="End Date" type="date" placeholder="Enter end date" defaultValue={values.endDate}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, endDate: event.target.value}))
+                <InputControl label="End Date" type="date" placeholder="Enter end date" value={values.endDate}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, endDate: event.target.value }))
                     } />
             </div>
 
@@ -177,11 +179,11 @@ function Editor(props) {
         <div className={style.detail}>
             <div className={style.column}>
                 <label>List Your Achievements</label>
-                <InputControl placeholder="Line 1" defaultValue={values.points ? values.points[0] : ""}
+                <InputControl placeholder="Line 1" value={values.points ? values.points[0] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 0)} />
-                <InputControl placeholder="Line 2" defaultValue={values.points ? values.points[1] : ""}
+                <InputControl placeholder="Line 2" value={values.points ? values.points[1] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 1)} />
-                <InputControl placeholder="Line 3" defaultValue={values.points ? values.points[2] : ""}
+                <InputControl placeholder="Line 3" value={values.points ? values.points[2] : ""}
                     onChange={(event) => handlePointUpdate(event.target.value, 2)} />
             </div>
         </div>
@@ -189,19 +191,19 @@ function Editor(props) {
 
     const summaryBody = (
         <div className={style.detail}>
-            <InputControl label="Summary" placeholder="Enter your Objective / Summary" defaultValue={values.summary}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, summary: event.target.value}))
-                    } />
+            <InputControl label="Summary" placeholder="Enter your Objective / Summary" value={values.summary}
+                onChange={(event) =>
+                    setVelues((prev) => ({ ...prev, summary: event.target.value }))
+                } />
         </div>
     );
 
     const otherBody = (
         <div className={style.detail}>
-            <InputControl label="Other" placeholder="Enter your Other details" defaultValue={values.other}
-                    onChange={(event) => 
-                        setVelues((prev) => ({ ...prev, other: event.target.value}))
-                    } />
+            <InputControl label="Other" placeholder="Enter your Other details" value={values.other}
+                onChange={(event) =>
+                    setVelues((prev) => ({ ...prev, other: event.target.value }))
+                } />
         </div>
     );
 
@@ -218,17 +220,146 @@ function Editor(props) {
         }
     };
 
+    // update details & save datails in setResumeInfo --> body
     const handleSubmission = () => {
-        console.log(values);
+        switch (sections[activeSecKey]) {
+            case sections.basicInfo: {
+                const tempDetail = {
+                    name: values.name,
+                    title: values.title,
+                    linkedin: values.linkedin,
+                    github: values.github,
+                    email: values.email,
+                    phone: values.phone,
+                };
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.basicInfo]: {
+                        ...prev[sections.basicInfo],
+                        detail: tempDetail,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            case sections.workExp: {
+                const tempDetail = {
+                    companyName: values.companyName,
+                    title: values.title,
+                    certificationLink: values.certificationLink,
+                    location: values.location,
+                    startDate: values.startDate,
+                    endDate: values.endDate,
+                    points: values.points,
+                };
+
+                const tempDetails = [...information[sections.workExp]?.details];
+                tempDetails[activeDetailIndex] = tempDetail;
+
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.workExp]: {
+                        ...prev[sections.workExp],
+                        details: tempDetails,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            case sections.project: {
+                const tempDetail = {
+                    title: values.title,
+                    overview: values.overview,
+                    deployLink: values.deployLink,
+                    githubLink: values.githubLink,
+                    points: values.points,
+                };
+
+                const tempDetails = [...information[sections.project]?.details];
+                tempDetails[activeDetailIndex] = tempDetail;
+
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.project]: {
+                        ...prev[sections.project],
+                        details: tempDetails,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            case sections.education: {
+                const tempDetail = {
+                    title: values.title,
+                    collegeName: values.collegeName,
+                    startDate: values.startDate,
+                    endDate: values.endDate,
+                };
+
+                const tempDetails = [...information[sections.education]?.details];
+                tempDetails[activeDetailIndex] = tempDetail;
+
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.education]: {
+                        ...prev[sections.education],
+                        details: tempDetails,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            case sections.achievments: {
+                const tempPoints = values.points;
+
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.achievments]: {
+                        ...prev[sections.achievments],
+                        points: tempPoints,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            case sections.summary: {
+                const tempDetail = values.summary;
+
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.summary]: {
+                        ...prev[sections.summary],
+                        detail: tempDetail,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            case sections.other: {
+                const tempDetail = values.other;
+
+                props.setInformation((prev) => ({
+                    ...prev,
+                    [sections.other]: {
+                        ...prev[sections.other],
+                        detail: tempDetail,
+                        sectionTitle,
+                    },
+                }));
+                break;
+            }
+            // default: return null;
+        }
     };
 
     useEffect(() => {
-        const activeInfo = information[sections[activeSecKey]]
-        setActiveInfo(activeInfo)
-        setSectionTitle(sections[activeSecKey])
+        const activeInfo = information[sections[activeSecKey]];
+        setActiveInfo(activeInfo);
+        setSectionTitle(sections[activeSecKey]);
+        setActiveDetailIndex(0);
         setVelues({
             name: activeInfo.detail?.name || "",
-            title: activeInfo?.details 
+            title: activeInfo?.details
                 ? activeInfo.details[0]?.title || ""
                 : activeInfo?.detail?.title || "",
             linkedin: activeInfo.detail?.linkedin || "",
@@ -236,30 +367,30 @@ function Editor(props) {
             phone: activeInfo.detail?.phone || "",
             email: activeInfo.detail?.email || "",
             companyName: activeInfo.detail?.companyName || "",
-            certificationLink: activeInfo.details 
+            certificationLink: activeInfo.details
                 ? activeInfo.details[0]?.certificationLink || ""
                 : "",
             location: activeInfo.detail?.location || "",
-            startDate: activeInfo.details 
+            startDate: activeInfo.details
                 ? activeInfo.details[0]?.startDate || ""
                 : "",
-            endDate: activeInfo.details 
+            endDate: activeInfo.details
                 ? activeInfo.details[0]?.endDate || ""
                 : "",
-            points: activeInfo.details 
-                ? activeInfo.details[0]?.points 
+            points: activeInfo.details
+                ? activeInfo.details[0]?.points
                     ? [...activeInfo.details[0]?.points]
                     : ""
-                : activeInfo.points 
+                : activeInfo.points
                     ? [...activeInfo.points]
                     : "",
-            overview: activeInfo.details 
+            overview: activeInfo.details
                 ? activeInfo.details[0]?.overview || ""
                 : "",
-            deployLink: activeInfo.details 
+            deployLink: activeInfo.details
                 ? activeInfo.details[0]?.deployLink || ""
                 : "",
-            githubLink: activeInfo.details 
+            githubLink: activeInfo.details
                 ? activeInfo.details[0]?.githubLink || ""
                 : "",
             collegeName: activeInfo.detail?.collegeName || "",
@@ -267,7 +398,8 @@ function Editor(props) {
             other: activeInfo.detail?.other || "",
         })
     }, [activeSecKey])
-    console.log(sections[activeSecKey]);
+
+    // console.log(sections[activeSecKey]);
     return (
         <div className={style.container}>
             <div className={style.header}>
@@ -280,23 +412,24 @@ function Editor(props) {
                 ))}
             </div>
             <div className={style.body}>
-                <InputControl 
-                    label="Section Title" 
+                <InputControl
+                    label="Section Title"
                     placeholder="Enter Section title"
-                    value={sectionTitle} 
+                    value={sectionTitle}
                     onChange={(e) => setSectionTitle(e.target.value)}
                 />
                 <div className={style.chips}>
                     {activeInfo?.details
                         ? activeInfo?.details.map((item, index) => (
                             <div
-                                className={style.chip}
+                                className={`${style.chip} ${activeDetailIndex === index ? style.active : ""}`}
                                 key={item.title}
+                                onClick={() => setActiveDetailIndex(index)}
                             >
                                 <p>
                                     {sections[activeSecKey]} {index + 1}
                                 </p>
-                                <XCircle className={style.close}/>
+                                <XCircle className={style.close} />
                             </div>
                         ))
                         : ""}
@@ -304,11 +437,11 @@ function Editor(props) {
                 </div>
                 {generateBody()}
                 <div className={style.savebtn}>
-                <button className={style.save} onClick={handleSubmission()}>Save<Save/></button>
+                    <button className={style.save} onClick={handleSubmission}>Save<Save /></button>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Editor
+export default Editor;
