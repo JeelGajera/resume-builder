@@ -27,17 +27,10 @@
 
 .header .active {
     border-bottom: 2px solid #f8b34b;
-    text-shadow: 1px 3px 8px rgb(7, 204, 253);
-    animation: fadeIn linear 1s;
 }
 
 .section:hover {
     text-shadow: 0 0 10px #eee;
-}
-
-@keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
 }
 
 .body {
@@ -82,6 +75,7 @@
     background-color: #646463;
     border-radius: 20px;
     box-shadow: 0 0 10px #000;
+    cursor: pointer;
 }
 
 .chip p {
@@ -90,22 +84,20 @@
     color: rgb(0, 0, 0);
 }
 
-.chip svg {
-    color: #fff;
+.chip_btn {
     cursor: pointer;
-}
-
-.chip .active {
-    background-color: rgb(205, 210, 214);
-    box-shadow: 0 0 10px #f8b34b;
-}
-
-.close {
-    color: #eee;
-}
-.close:active {
-    transform: scale(0.9);
     color: #ff7d00;
+}
+.chip .chip_btn:active {
+    color: #eee;
+    transform: scale(0.9);
+}
+
+.active_chip {
+    background-color: #141414;
+}
+.active_chip p {
+    color: #eee;
 }
 
 .savebtn {

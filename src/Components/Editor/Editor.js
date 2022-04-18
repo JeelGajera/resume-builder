@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import InputControl from "../InputControl/InputControl.js";
-import { XCircle, Save } from "react-feather";
+import { XCircle, Save, PlusCircle } from "react-feather";
 import style from "./Editor.module.css";
 
 function Editor(props) {
@@ -352,6 +352,35 @@ function Editor(props) {
         }
     };
 
+    const handleAddChip = () => {
+        const details = activeInfo?.details
+        const lastDetail = details.slice(-1)[0];
+        if (!details || !Object.keys(lastDetail).length) return;
+        details?.push({});
+        props.setInformation((prev) => ({
+            ...prev,
+            [sections[activeSecKey]]: {
+                ...information[sections[activeSecKey]],
+                details: details,
+            },
+        }));
+        setActiveDetailIndex(details?.length - 1);
+    };
+
+    const handleRemoveChip = (index) => {
+        const details = activeInfo?.details ? [...activeInfo?.details] : "";
+        if (!details) return;
+        details.splice(index, 1);
+        props.setInformation((prev) => ({
+            ...prev,
+            [sections[activeSecKey]]: {
+                ...information[sections[activeSecKey]],
+                details: details,
+            },
+        }));
+        setActiveDetailIndex((prev) => (prev === index ? prev - 1 : 0));
+    };
+
     useEffect(() => {
         const activeInfo = information[sections[activeSecKey]];
         setActiveInfo(activeInfo);
@@ -399,6 +428,30 @@ function Editor(props) {
         })
     }, [activeSecKey])
 
+    useEffect(() => {
+        setActiveInfo(information[sections[activeSecKey]])
+    }, [information])
+
+    useEffect(() => {
+        const details = activeInfo?.details
+        if (!details) return;
+        setVelues({
+            overview: activeInfo.details[activeDetailIndex]?.overview || "",
+            certificationLink: activeInfo.details[activeDetailIndex]?.certificationLink || "",
+            companyName: activeInfo.details[activeDetailIndex]?.companyName || "",
+            location: activeInfo.details[activeDetailIndex]?.location || "",
+            startDate: activeInfo.details[activeDetailIndex]?.startDate || "",
+            endDate: activeInfo.details[activeDetailIndex]?.endDate || "",
+            points: activeInfo.details[activeDetailIndex]?.points || "",
+            title: activeInfo.details[activeDetailIndex]?.title || "",
+            linkedin: activeInfo.details[activeDetailIndex]?.linkedin || "",
+            github: activeInfo.details[activeDetailIndex]?.github || "",
+            deployLink: activeInfo.details[activeDetailIndex]?.deployLink || "",
+            githubLink: activeInfo.details[activeDetailIndex]?.githubLink || "",
+            collegeName: activeInfo.details[activeDetailIndex]?.collegeName || "",
+        });
+    }, [activeDetailIndex]);
+
     // console.log(sections[activeSecKey]);
     return (
         <div className={style.container}>
@@ -422,22 +475,28 @@ function Editor(props) {
                     {activeInfo?.details
                         ? activeInfo?.details.map((item, index) => (
                             <div
-                                className={`${style.chip} ${activeDetailIndex === index ? style.active : ""}`}
+                                className={`${style.chip} ${activeDetailIndex === index ? style.active_chip : ""}`}
                                 key={item.title}
                                 onClick={() => setActiveDetailIndex(index)}
                             >
                                 <p>
                                     {sections[activeSecKey]} {index + 1}
                                 </p>
-                                <XCircle className={style.close} />
+                                <XCircle className={style.chip_btn} onClick={(event) => {
+                                    event.stopPropagation();
+                                    handleRemoveChip(index)
+                                }} />
                             </div>
                         ))
                         : ""}
+                    {activeInfo?.details?.length > 0 ? (
+                        <div className={style.chip}><p>Add</p><PlusCircle className={style.chip_btn} onClick={handleAddChip} /></div>
+                    ) : ""}
 
                 </div>
                 {generateBody()}
                 <div className={style.savebtn}>
-                    <button className={style.save} onClick={handleSubmission}>Save<Save /></button>
+                    <button className={style.save} onClick={handleSubmission}><p>Save</p><Save /></button>
                 </div>
             </div>
         </div>

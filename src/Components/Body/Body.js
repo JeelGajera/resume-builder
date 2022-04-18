@@ -26,7 +26,7 @@ function Body() {
             id: sections.workExp,
             sectionTitle: sections.workExp,
             details: [],
-        },
+        }, 
         [sections.project]: {
             id: sections.project,
             sectionTitle: sections.project,
@@ -55,7 +55,6 @@ function Body() {
     });
 
     useEffect(() => {
-        console.log(resumeInfo);
     }, [resumeInfo])
     
 
