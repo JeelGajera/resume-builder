@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Download } from 'react-feather';
-import Editor from '../Editor/Editor.js';
+import Editor from '../Editor/Editor';
+import Resume from '../Resume/Resume';
 import style from "./Body.module.css";
 
 function Body() { 
@@ -80,6 +81,7 @@ function Body() {
             </div>
             <div className={style.main}>
                 <Editor sections={sections}  information={resumeInfo} setInformation={setResumeInfo} />
+                <Resume />
             </div>
         </div>
     )

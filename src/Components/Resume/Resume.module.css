@@ -1,0 +1,135 @@
+.container {
+    height: fit-content;
+    background-color: #fff;
+    min-height: 450px;
+    padding: 10px 20px;
+    flex: 1;
+    box-shadow: -11px 10px 53px 5px rgba(0,0,0,0.66);
+    border-radius: 20px;
+    --color: #226291;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.heading {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.subHeading {
+    color: var(--color);
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+.links {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.link {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.link svg {
+    color: var(--color);
+    height: 18px;
+    width: 18px;
+}
+
+.main {
+    margin-top: 15px;
+    display: flex;
+    gap: 30px;
+}
+
+.col1, .col2{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.col2 {
+    flex: 1;
+}
+
+.section .secTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 2px solid #3332328f;
+    color: var(--color)
+}
+
+.section .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 1rem;
+}
+
+.section .content .item {
+    border-bottom: 1px dotted var(--color);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 5px;
+}
+
+.content .title {
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+}
+
+.content .subTitle {
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+.content .overview {
+    font-size: 0.95rem;
+}
+
+.content .link {
+    display: flex;
+    gap: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.content .link svg {
+    height: 14px;
+    width: 14px;
+    color: var(--color);
+}
+
+.content .date, .content .location, .content .clgName {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.content .date svg, .content .location svg, .content .clgName svg{
+    color: var(--color);
+    height: 14px;
+    width: 14px;
+}
+
+.content .points {
+    padding-left: 20px;
+    font-size: 0.95rem;
+}

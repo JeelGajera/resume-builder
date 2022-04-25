@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import InputControl from "../InputControl/InputControl.js";
+import InputControl from "../InputControl/InputControl";
 import { XCircle, Save, PlusCircle } from "react-feather";
 import style from "./Editor.module.css";
 
