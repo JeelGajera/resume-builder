@@ -6,6 +6,7 @@ import Resume from '../Resume/Resume';
 import style from "./Body.module.css";
 
 function Body() {
+
     const colors = ["#001524", "#ff7d00", "#A89C94FF", "#00203FFF", "#E94B3CFF", "#00539CFF"];
 
     const sections = {
@@ -62,7 +63,6 @@ function Body() {
 
     useEffect(() => {
     }, [resumeInfo])
-
 
     return (
         <div className={style.container}>

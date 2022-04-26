@@ -13,7 +13,6 @@
     background: linear-gradient(to right, #FF6B6B, #556270);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     max-height: 45vh;
-    box-shadow: 0 0 20px #000;
 }
 
 .container .heading {
@@ -56,6 +55,6 @@
         font-size: 1rem;
     }
     .image img {
-        width: 180px;
+        width: 100px;
     }
 }

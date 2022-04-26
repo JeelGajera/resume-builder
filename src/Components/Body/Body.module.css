@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 
 .container {
+  background-color: #161b22;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -14,9 +15,9 @@
   font-size: 2em;
   letter-spacing: 1px;
   font-weight: bolder;
-  font-weight: bold;
   font-family: 'Josefin Sans', sans-serif;
-  text-shadow: 1px 4px 4px rgba(0, 0, 0, 0.79);
+  color:#eee;
+  text-shadow: 1px 4px 4px rgba(17, 1, 1, 0.993);
 }
 
 .toolbar {
@@ -179,7 +180,7 @@
 
 @media only screen and (max-width: 375px) {
   .toolbar {
-    width: 365px;
+    width: 350px;
     gap: 5px;
   }
 

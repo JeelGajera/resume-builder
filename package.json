@@ -18,6 +18,7 @@
     "react-feather": "^2.0.9",
     "react-scripts": "5.0.0",
     "react-to-print": "^2.14.6",
+    "react-tsparticles": "^2.0.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
