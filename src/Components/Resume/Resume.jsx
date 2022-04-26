@@ -68,7 +68,7 @@ const Resume = forwardRef((props, ref) => {
                 }
                 {
                   item.certificationLink ? (
-                    <a className={style.link} href={item.certificationLink}>
+                    <a className={style.link}>
                       <Link />{item.certificationLink}
                     </a>
                   ) : <span/>
@@ -111,14 +111,14 @@ const Resume = forwardRef((props, ref) => {
                 }
                 {
                   item.deployeLink ? (
-                    <a className={`${style.link} ${style.deployeLink}`} href={item.deployeLink}>
+                    <a className={`${style.link} ${style.deployeLink}`}>
                       <Link />{item.deployeLink}
                     </a>
                   ) : <span/>
                 }
                 {
                   item.githubLink ? (
-                    <a className={`${style.link} ${style.githubLink}`} href={item.githubLink}>
+                    <a className={`${style.link} ${style.githubLink}`}>
                       <GitHub />{item.githubLink}
                     </a>
                   ) : <span/>
