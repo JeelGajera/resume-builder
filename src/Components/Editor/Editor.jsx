@@ -309,13 +309,13 @@ function Editor(props) {
                 }));
                 break;
             }
-            case sections.achievments: {
+            case sections.achievements: {
                 const tempPoints = values.points;
 
                 props.setInformation((prev) => ({
                     ...prev,
-                    [sections.achievments]: {
-                        ...prev[sections.achievments],
+                    [sections.achievements]: {
+                        ...prev[sections.achievements],
                         points: tempPoints,
                         sectionTitle,
                     },

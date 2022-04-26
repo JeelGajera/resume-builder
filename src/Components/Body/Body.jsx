@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Download } from 'react-feather';
+import ReactToPrint from 'react-to-print';
 import Editor from '../Editor/Editor';
 import Resume from '../Resume/Resume';
 import style from "./Body.module.css";
 
-function Body() { 
+function Body() {
     const colors = ["#001524", "#ff7d00", "#A89C94FF", "#00203FFF", "#E94B3CFF", "#00539CFF"];
- 
+
     const sections = {
         basicInfo: "Basic Info",
         workExp: "Work Experience",
@@ -16,6 +17,10 @@ function Body() {
         summary: "Summary",
         other: "Other"
     };
+
+    const [activeColor, setActiveColor] = useState(colors[0]);
+
+    const resumeRef = useRef();
 
     const [resumeInfo, setResumeInfo] = useState({
         [sections.basicInfo]: {
@@ -27,7 +32,7 @@ function Body() {
             id: sections.workExp,
             sectionTitle: sections.workExp,
             details: [],
-        }, 
+        },
         [sections.project]: {
             id: sections.project,
             sectionTitle: sections.project,
@@ -48,7 +53,7 @@ function Body() {
             sectionTitle: sections.summary,
             detail: "",
         },
-        [sections.other] : {
+        [sections.other]: {
             id: sections.other,
             sectionTitle: sections.other,
             detail: "",
@@ -57,7 +62,7 @@ function Body() {
 
     useEffect(() => {
     }, [resumeInfo])
-    
+
 
     return (
         <div className={style.container}>
@@ -70,18 +75,36 @@ function Body() {
                         <span
                             key={item}
                             style={{ backgroundColor: item }}
-                            className={style.color}
+                            onClick={() => setActiveColor(item)}
+                            className={`${style.color} ${activeColor === item ? style.activeColor : ""}`}
                         />
                     ))}
                 </div>
-                <button className={style.downloadbtn}>
-                    <span>Download! <Download />
-                    </span>
-                </button>
+                <ReactToPrint
+                    trigger={() => {
+                        return (
+                            <button className={style.downloadbtn}>
+                                <span>Download!&nbsp;<Download />
+                                </span>
+                            </button>
+                        );
+                    }}
+                    content={() => resumeRef.current}
+                />
+
             </div>
             <div className={style.main}>
-                <Editor sections={sections}  information={resumeInfo} setInformation={setResumeInfo} />
-                <Resume />
+                <Editor
+                    sections={sections}
+                    information={resumeInfo}
+                    setInformation={setResumeInfo}
+                />
+                <Resume
+                    ref={resumeRef}
+                    sections={sections}
+                    information={resumeInfo}
+                    activeColor={activeColor}
+                />
             </div>
         </div>
     )

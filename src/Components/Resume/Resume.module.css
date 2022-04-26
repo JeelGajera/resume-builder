@@ -4,8 +4,6 @@
     min-height: 450px;
     padding: 10px 20px;
     flex: 1;
-    box-shadow: -11px 10px 53px 5px rgba(0,0,0,0.66);
-    border-radius: 20px;
     --color: #226291;
 }
 
@@ -109,6 +107,7 @@
     gap: 5px;
     font-size: 0.8rem;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .content .link svg {
@@ -132,4 +131,8 @@
 .content .points {
     padding-left: 20px;
     font-size: 0.95rem;
+}
+
+.hidden {
+    display: none;
 }
