@@ -263,13 +263,14 @@ const Resume = forwardRef((props, ref) => {
     container.style.setProperty("--color", props.activeColor);
   }, [props.activeColor])
 
+  // console.log(info.basicInfo.detail.profile)
   return (
     <div ref={ref}>
       <div ref={containerRef} className={style.container}>
-        <div className={style.header}>
-          <p className={style.heading}>{info.basicInfo?.detail?.name}</p>
-          <p className={style.subHeading}>{info.basicInfo?.detail?.title}</p>
-          <div className={style.hero}>
+        <div className={style.hero}>
+          <div className={style.header}>
+            <p className={style.heading}>{info.basicInfo?.detail?.name}</p>
+            <p className={style.subHeading}>{info.basicInfo?.detail?.title}</p>
             <div className={style.links}>
               {
                 info.basicInfo?.detail?.address ? (
@@ -286,45 +287,46 @@ const Resume = forwardRef((props, ref) => {
                 ) : <span />
               }
             </div>
-            <div className={style.profile}>
+            <div className={style.links}>
               {
-                info.basicInfo?.detail?.profile ? (
-                  <img src={info.basicInfo?.detail?.profile} />
+                info.basicInfo?.detail?.email ? (
+                  <a className={style.link} type="email">
+                    <Mail /> {info.basicInfo?.detail?.email}
+                  </a>
+                ) : <span />
+              }
+              {
+                info.basicInfo?.detail?.phone ? (
+                  <a className={style.link}>
+                    <Phone /> {info.basicInfo?.detail?.phone}
+                  </a>
+                ) : <span />
+              }
+              {
+                info.basicInfo?.detail?.linkedin ? (
+                  <a className={style.link}>
+                    <Linkedin /> {info.basicInfo?.detail?.linkedin}
+                  </a>
+                ) : <span />
+              }
+              {
+                info.basicInfo?.detail?.github ? (
+                  <a className={style.link}>
+                    <GitHub /> {info.basicInfo?.detail?.github}
+                  </a>
                 ) : <span />
               }
             </div>
           </div>
-          <div className={style.links}>
+          <div className={style.profile}>
             {
-              info.basicInfo?.detail?.email ? (
-                <a className={style.link} type="email">
-                  <Mail /> {info.basicInfo?.detail?.email}
-                </a>
-              ) : <span />
-            }
-            {
-              info.basicInfo?.detail?.phone ? (
-                <a className={style.link}>
-                  <Phone /> {info.basicInfo?.detail?.phone}
-                </a>
-              ) : <span />
-            }
-            {
-              info.basicInfo?.detail?.linkedin ? (
-                <a className={style.link}>
-                  <Linkedin /> {info.basicInfo?.detail?.linkedin}
-                </a>
-              ) : <span />
-            }
-            {
-              info.basicInfo?.detail?.github ? (
-                <a className={style.link}>
-                  <GitHub /> {info.basicInfo?.detail?.github}
-                </a>
+              info.basicInfo?.detail?.profile ? (
+                <img src={info.basicInfo?.detail?.profile} alt="Resume-Profile" />
               ) : <span />
             }
           </div>
         </div>
+
         <div className={style.main}>
           <div className={style.col1}>{
             column[0].map(i => sectionPart[i])

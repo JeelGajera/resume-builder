@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Download } from 'react-feather';
+import { AlertTriangle, Download } from 'react-feather';
 import ReactToPrint from 'react-to-print';
 import Editor from '../Editor/Editor';
-import InputControl from '../InputControl/InputControl';
 import Resume from '../Resume/Resume';
 import style from "./Body.module.css";
 
@@ -17,7 +16,7 @@ function Body() {
         summary: "Summary",
         other: "Other"
     };
-    let defaultcolor = '#226291';
+    const defaultcolor = '#226291';
     const [activeColor, setActiveColor] = useState(defaultcolor);
 
     const resumeRef = useRef();
@@ -71,7 +70,7 @@ function Body() {
             <div className={style.toolbar}>
                 <div className={style.colors}>
                     <label>Select Color:-</label>
-                    <input type="color" value={activeColor} id="colorPick" name="colorPick" onChange={(e) => setActiveColor(e.target.value)}/>
+                    <input type="color" value={activeColor} id="colorPick" name="colorPick" onChange={(e) => setActiveColor(e.target.value)} />
                 </div>
                 <ReactToPrint
                     trigger={() => {
@@ -98,6 +97,10 @@ function Body() {
                     information={resumeInfo}
                     activeColor={activeColor}
                 />
+                <div className={style.userManual}>
+                    <p><AlertTriangle/>We dont'n save your data in any external sources. Make sure that download your resume before Reload/Leave.</p>
+                    <a href="https://github.com/JeelGajera" target="_blank">Developer Contact</a>
+                </div>
             </div>
         </div>
     )

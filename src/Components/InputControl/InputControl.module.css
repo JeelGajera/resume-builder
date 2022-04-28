@@ -9,6 +9,7 @@ label {
 }
 input {
     border: 1px solid #ccc;
+    background-color: #fff;
     outline: none;
     padding: 10px 12px;
     font-size: 1rem;

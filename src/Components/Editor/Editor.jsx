@@ -24,15 +24,12 @@ function Editor(props) {
         linkedin: activeInfo.detail?.linkedin || "",
         github: activeInfo.detail?.github || "",
         phone: activeInfo.detail?.phone || "",
+        profile: activeInfo.detail?.profile || "",
         email: activeInfo.detail?.email || "",
     });
 
     const [imgProfile, setImgProfile] = useState();
-    const  onImageChange = (e) => {
-        const [file] = e.target.files;
-        setImgProfile(URL.createObjectURL(file));
-        // return imgProfile;
-    };
+    
 
     const handlePointUpdate = (value, index) => {
         const tempVal = { ...values };
@@ -64,10 +61,11 @@ function Editor(props) {
                     onChange={(event) =>
                         setVelues((prev) => ({ ...prev, dob: event.target.value }))
                     } />
-                {/* <InputControl label="Profile Picture" type="file" accept="image/*" placeholder="Select Image" value={values.profile}
-                    onChange={(event) =>
-                        setVelues((prev) => ({ ...prev, profile: event.target.URL.createObjectURL.file }))
-                    } /> */}
+                <InputControl label="Profile Picture" type="file" accept="image/*" placeholder="Select Image"
+                    onChange={(event) => 
+                        setImgProfile(() => (URL.createObjectURL(event.target.files[0])))
+                    }
+                />
             </div>
             <div className={style.row}>
                 <InputControl label="Linkedin Link" placeholder="Enter Linkedin profile link" value={values.linkedin}
@@ -249,7 +247,7 @@ function Editor(props) {
                     name: values.name,
                     title: values.title,
                     address: values.address,
-                    profile: values.profile,
+                    profile: imgProfile,
                     dob: values.dob,
                     linkedin: values.linkedin,
                     github: values.github,
@@ -459,6 +457,7 @@ function Editor(props) {
         setActiveInfo(information[sections[activeSecKey]])
     }, [information])
 
+    //Multi Value Sections
     useEffect(() => {
         const details = activeInfo?.details
         if (!details) return;
@@ -468,9 +467,6 @@ function Editor(props) {
             companyName: activeInfo.details[activeDetailIndex]?.companyName || "",
             location: activeInfo.details[activeDetailIndex]?.location || "",
             startDate: activeInfo.details[activeDetailIndex]?.startDate || "",
-            address: activeInfo.details[activeDetailIndex]?.address || "",
-            dob: activeInfo.details[activeDetailIndex]?.dob || "",
-            profile: activeInfo.details[activeDetailIndex]?.profile || "",
             endDate: activeInfo.details[activeDetailIndex]?.endDate || "",
             points: activeInfo.details[activeDetailIndex]?.points || "",
             title: activeInfo.details[activeDetailIndex]?.title || "",
@@ -482,7 +478,6 @@ function Editor(props) {
         });
     }, [activeDetailIndex]);
 
-    // console.log(sections[activeSecKey]);
     return (
         <div className={style.container}>
             <div className={style.header}>
@@ -528,6 +523,7 @@ function Editor(props) {
                 <div className={style.savebtn}>
                     <button className={style.save} onClick={handleSubmission}><p>Save</p><Save /></button>
                 </div>
+                {/* <img src={imgProfile} alt="profile" height="100px" width="100px"/> */}
             </div>
         </div>
     )
