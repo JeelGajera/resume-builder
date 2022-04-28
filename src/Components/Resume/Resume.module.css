@@ -25,6 +25,16 @@
     font-size: 1.3rem;
 }
 
+.hero {
+    display: flex;
+}
+
+.hero .profile {
+    /* height: 200px;
+    width: 200px; */
+    border-radius: 50%;
+}
+
 .links {
     margin-top: 15px;
     display: flex;

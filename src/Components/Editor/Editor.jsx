@@ -27,6 +27,13 @@ function Editor(props) {
         email: activeInfo.detail?.email || "",
     });
 
+    const [imgProfile, setImgProfile] = useState();
+    const  onImageChange = (e) => {
+        const [file] = e.target.files;
+        setImgProfile(URL.createObjectURL(file));
+        // return imgProfile;
+    };
+
     const handlePointUpdate = (value, index) => {
         const tempVal = { ...values };
         if (!Array.isArray(tempVal.points)) tempVal.points = [];
@@ -48,6 +55,20 @@ function Editor(props) {
                 onChange={(event) =>
                     setVelues((prev) => ({ ...prev, title: event.target.value }))
                 } />
+            <InputControl label="Address" placeholder="Enter your address" value={values.address}
+                onChange={(event) =>
+                    setVelues((prev) => ({ ...prev, address: event.target.value }))
+                } />
+            <div className={style.row}>
+                <InputControl label="Date Of Birth" type="date" placeholder="Enter DOB" value={values.dob}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, dob: event.target.value }))
+                    } />
+                {/* <InputControl label="Profile Picture" type="file" accept="image/*" placeholder="Select Image" value={values.profile}
+                    onChange={(event) =>
+                        setVelues((prev) => ({ ...prev, profile: event.target.URL.createObjectURL.file }))
+                    } /> */}
+            </div>
             <div className={style.row}>
                 <InputControl label="Linkedin Link" placeholder="Enter Linkedin profile link" value={values.linkedin}
                     onChange={(event) =>
@@ -227,6 +248,9 @@ function Editor(props) {
                 const tempDetail = {
                     name: values.name,
                     title: values.title,
+                    address: values.address,
+                    profile: values.profile,
+                    dob: values.dob,
                     linkedin: values.linkedin,
                     github: values.github,
                     email: values.email,
@@ -396,6 +420,9 @@ function Editor(props) {
             phone: activeInfo.detail?.phone || "",
             email: activeInfo.detail?.email || "",
             companyName: activeInfo.detail?.companyName || "",
+            address: activeInfo.detail?.address || "",
+            dob: activeInfo.detail?.dob || "",
+            profile: activeInfo.detail?.profile || "",
             certificationLink: activeInfo.details
                 ? activeInfo.details[0]?.certificationLink || ""
                 : "",
@@ -441,6 +468,9 @@ function Editor(props) {
             companyName: activeInfo.details[activeDetailIndex]?.companyName || "",
             location: activeInfo.details[activeDetailIndex]?.location || "",
             startDate: activeInfo.details[activeDetailIndex]?.startDate || "",
+            address: activeInfo.details[activeDetailIndex]?.address || "",
+            dob: activeInfo.details[activeDetailIndex]?.dob || "",
+            profile: activeInfo.details[activeDetailIndex]?.profile || "",
             endDate: activeInfo.details[activeDetailIndex]?.endDate || "",
             points: activeInfo.details[activeDetailIndex]?.points || "",
             title: activeInfo.details[activeDetailIndex]?.title || "",

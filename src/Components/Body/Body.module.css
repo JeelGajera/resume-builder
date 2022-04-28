@@ -16,7 +16,7 @@
   letter-spacing: 1px;
   font-weight: bolder;
   font-family: 'Josefin Sans', sans-serif;
-  color:#eee;
+  color: #eee;
   text-shadow: 1px 4px 4px rgba(17, 1, 1, 0.993);
 }
 
@@ -28,36 +28,30 @@
   gap: 1rem;
 }
 
-.colors .activeColor {
-  border: 2px solid #fff;
+.colors {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.colors input {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  height: 2.5rem;
+}
+
+.colors label {
+  color: #eee;
+  font-size: 1.2rem;
+
 }
 
 .main {
   display: flex;
   flex-direction: column;
   gap: 30px;
-}
-
-.colors {
-  display: flex;
-  gap: 20px;
-  padding: 0 20px;
-}
-
-.colors .color {
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #000;
-  cursor: pointer;
-}
-
-.color:hover {
-  opacity: 0.85;
-}
-
-.color:active {
-  transform: scale(0.9);
 }
 
 .downloadbtn {

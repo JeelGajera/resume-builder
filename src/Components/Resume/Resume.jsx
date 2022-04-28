@@ -44,11 +44,11 @@ const Resume = forwardRef((props, ref) => {
               <div className={style.item} key={item.title}>
                 {
                   item.title ?
-                  <p className={style.title}>{item.title}</p> : <span/>
+                    <p className={style.title}>{item.title}</p> : <span />
                 }
                 {
                   item.companyName ?
-                  <p className={style.subTitle}>{item.companyName}</p> : <span/>
+                    <p className={style.subTitle}>{item.companyName}</p> : <span />
                 }
                 {
                   item.startDate && item.endDate ? (
@@ -56,7 +56,7 @@ const Resume = forwardRef((props, ref) => {
                       <Calendar />{getDates(item.startDate)} - {getDates(item.endDate)}
                     </div>
                   ) : (
-                    <div/>
+                    <div />
                   )
                 }
                 {
@@ -64,14 +64,14 @@ const Resume = forwardRef((props, ref) => {
                     <div className={style.location}>
                       <MapPin />{item.location}
                     </div>
-                  ) : <span/>
+                  ) : <span />
                 }
                 {
                   item.certificationLink ? (
                     <a className={style.link}>
                       <Link />{item.certificationLink}
                     </a>
-                  ) : <span/>
+                  ) : <span />
                 }
                 {
                   item.points?.length > 0 ? (
@@ -82,7 +82,7 @@ const Resume = forwardRef((props, ref) => {
                         </li>
                       ))}
                     </ul>
-                  ) : <span/>
+                  ) : <span />
                 }
               </div>
             ))
@@ -103,25 +103,25 @@ const Resume = forwardRef((props, ref) => {
               <div className={style.item} key={item.title}>
                 {
                   item.title ?
-                  <p className={style.title}>{item.title}</p> : <span/>
+                    <p className={style.title}>{item.title}</p> : <span />
                 }
                 {
                   item.overview ?
-                  <p className={style.overview}>{item.overview}</p> : <span/>
+                    <p className={style.overview}>{item.overview}</p> : <span />
                 }
                 {
                   item.deployeLink ? (
                     <a className={`${style.link} ${style.deployeLink}`}>
                       <Link />{item.deployeLink}
                     </a>
-                  ) : <span/>
+                  ) : <span />
                 }
                 {
                   item.githubLink ? (
                     <a className={`${style.link} ${style.githubLink}`}>
                       <GitHub />{item.githubLink}
                     </a>
-                  ) : <span/>
+                  ) : <span />
                 }
                 {
                   item.points?.length > 0 ? (
@@ -132,7 +132,7 @@ const Resume = forwardRef((props, ref) => {
                         </li>
                       ))}
                     </ul>
-                  ) : <span/>
+                  ) : <span />
                 }
               </div>
             ))
@@ -153,14 +153,14 @@ const Resume = forwardRef((props, ref) => {
               <div className={style.item} key={item.title}>
                 {
                   item.title ?
-                  <p className={style.title}>{item.title}</p> : <span/>
+                    <p className={style.title}>{item.title}</p> : <span />
                 }
                 {
                   item.collegeName ? (
                     <div className={style.clgName}>
                       <Bookmark />{item.collegeName}
                     </div>
-                  ) : <span/>
+                  ) : <span />
                 }
                 {
                   item.startDate && item.endDate ? (
@@ -168,7 +168,7 @@ const Resume = forwardRef((props, ref) => {
                       <Calendar />{getDates(item.startDate)} - {getDates(item.endDate)}
                     </div>
                   ) : (
-                    <div/>
+                    <div />
                   )
                 }
               </div>
@@ -194,7 +194,7 @@ const Resume = forwardRef((props, ref) => {
                   </li>
                 ))}
               </ul>
-            ) : <span/>
+            ) : <span />
           }
         </div>
       </div>
@@ -269,34 +269,59 @@ const Resume = forwardRef((props, ref) => {
         <div className={style.header}>
           <p className={style.heading}>{info.basicInfo?.detail?.name}</p>
           <p className={style.subHeading}>{info.basicInfo?.detail?.title}</p>
+          <div className={style.hero}>
+            <div className={style.links}>
+              {
+                info.basicInfo?.detail?.address ? (
+                  <div className={style.link}>
+                    <MapPin /> {info.basicInfo?.detail?.address}
+                  </div>
+                ) : <span />
+              }
+              {
+                info.basicInfo?.detail?.dob ? (
+                  <div className={style.link}>
+                    <Calendar /> {getDates(info.basicInfo?.detail?.dob)}
+                  </div>
+                ) : <span />
+              }
+            </div>
+            <div className={style.profile}>
+              {
+                info.basicInfo?.detail?.profile ? (
+                  <img src={info.basicInfo?.detail?.profile} />
+                ) : <span />
+              }
+            </div>
+          </div>
           <div className={style.links}>
             {
               info.basicInfo?.detail?.email ? (
                 <a className={style.link} type="email">
                   <Mail /> {info.basicInfo?.detail?.email}
                 </a>
-              ) : <span/>
+              ) : <span />
             }
             {
               info.basicInfo?.detail?.phone ? (
                 <a className={style.link}>
                   <Phone /> {info.basicInfo?.detail?.phone}
                 </a>
-              ) : <span/>
+              ) : <span />
             }
             {
               info.basicInfo?.detail?.linkedin ? (
                 <a className={style.link}>
                   <Linkedin /> {info.basicInfo?.detail?.linkedin}
                 </a>
-              ) : <span/>
+              ) : <span />
             }
             {
               info.basicInfo?.detail?.github ? (
                 <a className={style.link}>
                   <GitHub /> {info.basicInfo?.detail?.github}
                 </a>
-              ) : <span/>
+              ) : <span />
             }
           </div>
         </div>

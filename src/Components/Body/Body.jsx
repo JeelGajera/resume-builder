@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Download } from 'react-feather';
 import ReactToPrint from 'react-to-print';
 import Editor from '../Editor/Editor';
+import InputControl from '../InputControl/InputControl';
 import Resume from '../Resume/Resume';
 import style from "./Body.module.css";
 
 function Body() {
-
-    const colors = ["#001524", "#ff7d00", "#A89C94FF", "#00203FFF", "#E94B3CFF", "#00539CFF"];
 
     const sections = {
         basicInfo: "Basic Info",
@@ -18,8 +17,8 @@ function Body() {
         summary: "Summary",
         other: "Other"
     };
-
-    const [activeColor, setActiveColor] = useState(colors[0]);
+    let defaultcolor = '#226291';
+    const [activeColor, setActiveColor] = useState(defaultcolor);
 
     const resumeRef = useRef();
 
@@ -71,14 +70,8 @@ function Body() {
             </p>
             <div className={style.toolbar}>
                 <div className={style.colors}>
-                    {colors.map((item) => (
-                        <span
-                            key={item}
-                            style={{ backgroundColor: item }}
-                            onClick={() => setActiveColor(item)}
-                            className={`${style.color} ${activeColor === item ? style.activeColor : ""}`}
-                        />
-                    ))}
+                    <label>Select Color:-</label>
+                    <input type="color" value={activeColor} id="colorPick" name="colorPick" onChange={(e) => setActiveColor(e.target.value)}/>
                 </div>
                 <ReactToPrint
                     trigger={() => {
